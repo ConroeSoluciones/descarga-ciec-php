@@ -1,0 +1,8 @@
+parameters:
+    errorFormat: table
+    tmpDir: ./build/cache/phpstan
+    treatPhpDocTypesAsCertain: false
+    level: max
+    paths:
+        - ./src
+        - ./tests

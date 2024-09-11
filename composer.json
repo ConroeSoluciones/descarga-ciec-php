@@ -1,0 +1,67 @@
+{
+    "name": "csfacturacion/descarga-ciec-php",
+    "description": "API sencilla para interactuar con el servicio de descarga masiva mediante CIEC de CSFacturacion",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "SAT",
+        "descarga-masiva",
+        "CIEC",
+        "XML",
+        "metadata",
+        "scrap"
+    ],
+    "authors": [
+        {
+            "name": "Antonio Gamboa",
+            "email": "antonio.gamboa@csfacturacion.com",
+            "homepage": "https://gamboa.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/http-client": "^6.4"
+    },
+    "require-dev": {
+        "ramsey/devtools": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Csfacturacion\\Descarga\\": "src/"
+        },
+        "files": [
+            "src/Util/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Csfacturacion\\Test\\Descarga\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "captainhook/plugin-composer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "ramsey/composer-repl": true,
+            "ramsey/devtools": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "captainhook": {
+            "force-install": true
+        },
+        "ramsey/conventional-commits": {
+            "configFile": "conventional-commits.json"
+        },
+        "ramsey/devtools": {
+            "command-prefix": "src",
+            "memory-limit": "-1"
+        }
+    }
+}
