@@ -40,10 +40,10 @@ jobs:
         uses: "ramsey/composer-install@2.2.0"
 
       - name: "Check syntax (php-parallel-lint)"
-        run: "composer dev:lint:syntax"
+        run: "composer src:lint:syntax"
 
       - name: "Check coding standards (PHP_CodeSniffer)"
-        run: "composer dev:lint:style"
+        run: "composer src:lint:style"
 
   static-analysis:
     name: "Static analysis"
@@ -64,10 +64,10 @@ jobs:
         uses: "ramsey/composer-install@2.2.0"
 
       - name: "Statically analyze code (PHPStan)"
-        run: "composer dev:analyze:phpstan"
+        run: "composer src:analyze:phpstan"
 
       - name: "Statically analyze code (Psalm)"
-        run: "composer dev:analyze:psalm -- --shepherd"
+        run: "composer src:analyze:psalm -- --shepherd"
 
   security-analysis:
     name: "Security analysis"
@@ -101,34 +101,34 @@ jobs:
         with:
           sarif_file: "build/logs/psalm.sarif"
 
-  code-coverage:
-    name: "Code coverage"
-    needs: ["coding-standards", "static-analysis"]
-    runs-on: "ubuntu-latest"
+  #code-coverage:
+  #  name: "Code coverage"
+  #  needs: ["coding-standards", "static-analysis"]
+  #  runs-on: "ubuntu-latest"
 
-    steps:
-      - name: "Checkout repository"
-        uses: "actions/checkout@v4.1.1"
+  #  steps:
+  #    - name: "Checkout repository"
+  #      uses: "actions/checkout@v4.1.1"
 
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@2.26.0"
-        with:
-          php-version: "latest"
-          coverage: "pcov"
-          ini-values: "memory_limit=-1"
+  #    - name: "Install PHP"
+  #      uses: "shivammathur/setup-php@2.26.0"
+  #      with:
+  #        php-version: "latest"
+  #        coverage: "pcov"
+  #        ini-values: "memory_limit=-1"
 
-      - name: "Install dependencies (Composer)"
-        uses: "ramsey/composer-install@2.2.0"
+  #    - name: "Install dependencies (Composer)"
+  #      uses: "ramsey/composer-install@2.2.0"
 
-      - name: "Run unit tests (PHPUnit)"
-        run: "composer dev:test:coverage:ci"
+  #    - name: "Run unit tests (PHPUnit)"
+  #      run: "composer src:test:coverage:ci"
 
-      - name: "Publish coverage report to Codecov"
-        uses: "codecov/codecov-action@v3.1.4"
+  #    - name: "Publish coverage report to Codecov"
+  #      uses: "codecov/codecov-action@v3.1.4"
 
   unit-tests:
     name: "Unit tests"
-    needs: ["code-coverage"]
+    #needs: ["code-coverage"]
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -183,4 +183,4 @@ jobs:
 
       - name: "Run unit tests (PHPUnit)"
         shell: "bash"
-        run: "composer dev:test:unit"
+        run: "composer src:test:unit"
